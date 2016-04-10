@@ -1,0 +1,47 @@
+﻿@model GitHubSearchRepository.Models.IndexModel
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Search repositories</h2>
+
+@using (Html.BeginForm("Index", "Home", FormMethod.Get))
+{
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <div class="form-group">
+                <label for="keywords">Keywords</label>
+                <input type="text" class="form-control" id="keywords" name="Filter.Keywords" placeholder="search..." value="@Model.Filter.Keywords">
+            </div>
+        </div>
+        <div class="panel-footer">
+            <div class="row">
+                <div class="col-lg-offset-10 col-md-offset-10 col-sm-offset-10 col-lg-2 col-md-2 col-sm-2">
+                    <button type="submit" class="btn btn-primary pull-right">Search</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    if (Model.Items.Any())
+    {
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Url</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Items)
+                {
+                    <tr>
+                        <td>@item.Name</td>
+                        <td><a href="@item.Url">@item.Url</a></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+}
